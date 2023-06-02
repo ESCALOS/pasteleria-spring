@@ -53,8 +53,8 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             }) 
             .authorizeHttpRequests( auth -> {
-                auth.requestMatchers("/api/auth/**").permitAll();
-                auth.requestMatchers(HttpMethod.GET, "/api/celular/listar").hasAnyAuthority("ADMIN","USER");
+                auth.requestMatchers("/api/auth/login").permitAll();
+                auth.requestMatchers(HttpMethod.POST, "/api/auth/current-user").hasAnyAuthority("ADMIN","USER");
                 auth.anyRequest().authenticated();
             })
             .csrf(AbstractHttpConfigurer::disable)

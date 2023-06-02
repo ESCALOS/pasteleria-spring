@@ -2,7 +2,6 @@ package com.nanoka.pasteleria.controllers;
 
 import java.security.Principal;
 import java.util.Collections;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanoka.pasteleria.dtos.DtoAuthResponse;
+import com.nanoka.pasteleria.dtos.DtoCurrentUser;
 import com.nanoka.pasteleria.dtos.DtoLogin;
 import com.nanoka.pasteleria.dtos.DtoRegister;
 import com.nanoka.pasteleria.models.Role;
@@ -45,16 +45,10 @@ public class RestControllerAuth {
         if(userRepository.existsByUsername(dtoRegister.getUsername())){
             return new ResponseEntity<>("El usuario ya existe", HttpStatus.BAD_REQUEST);
         }
-        if(userRepository.existsByEmail(dtoRegister.getEmail())) {
-            return new ResponseEntity<>("El correo ya está registrado con otro usuario", HttpStatus.BAD_REQUEST);
-        }
         UserEntity user = new UserEntity();
         user.setUsername(dtoRegister.getUsername());
         user.setPassword(passwordEncoder.encode(dtoRegister.getPassword()));
 		user.setName(dtoRegister.getName());
-		user.setLastname(dtoRegister.getLastname());
-		user.setEmail(dtoRegister.getEmail());
-		user.setTelephone(dtoRegister.getTelephone());
         Role role = roleRepository.findByName("USER").get();
         user.setRoles(Collections.singletonList(role));
         userRepository.save(user);
@@ -69,9 +63,10 @@ public class RestControllerAuth {
         return new ResponseEntity<DtoAuthResponse>(new DtoAuthResponse(token), HttpStatus.OK);
     }
 
-    @GetMapping("usuario-actual")
-    public Optional<UserEntity> obtenerUsuarioActual(Principal principal) {
-        return userRepository.findByUsername(principal.getName());
+    @GetMapping("current-user")
+    public ResponseEntity<DtoCurrentUser> obtenerUsuarioActual(Principal principal) {
+        UserEntity user = userRepository.findByUsername(principal.getName()).get();
+        return new ResponseEntity<DtoCurrentUser>(new DtoCurrentUser(user.getUsername(), user.getName(), user.getRoles()), HttpStatus.OK);
     }
 
 }

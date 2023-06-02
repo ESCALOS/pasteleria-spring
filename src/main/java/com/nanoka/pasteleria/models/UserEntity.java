@@ -19,11 +19,7 @@ public class UserEntity {
     private String username;
     private String password;
     private String name;
-    private String lastname;
-    private String email;
-    private String telephone;
     private Boolean enabled = true;
-    private String profile = "default.png";
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
