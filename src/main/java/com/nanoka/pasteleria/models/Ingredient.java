@@ -8,13 +8,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "ingredients")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Role {
+public class Ingredient {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     
+    @ManyToOne(targetEntity = MeasurementUnit.class)
+    MeasurementUnit measurementUnit;
 }

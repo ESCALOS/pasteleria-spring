@@ -35,6 +35,14 @@ public class PasteleriaApplication implements CommandLineRunner{
 			Role role = new Role();
 			role.setName("ADMIN");
 			roleRepository.save(role);
+
+			Role role2 = new Role();
+			role2.setName("PASTELERO");
+			roleRepository.save(role2);
+
+			Role role3 = new Role();
+			role3.setName("CAJERO");
+			roleRepository.save(role3);
 		}
 
 		if(!userRepository.existsByUsername("ADMIN")){

@@ -8,13 +8,16 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "ingredient_stocks")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Role {
+public class IngredientStock {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    
+
+    @ManyToOne(targetEntity = Ingredient.class)
+    Ingredient ingredient;
+    Double quantity;
+    Double price;
 }
