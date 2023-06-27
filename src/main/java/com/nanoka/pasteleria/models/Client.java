@@ -11,11 +11,11 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Product {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column(name = "document_number", length = 11)
+    String documentNumber; 
     String name;
-    String description;
-    Boolean cake = true;
 }

@@ -8,14 +8,18 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "ingredient_inputs")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Product {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    String description;
-    Boolean cake = true;
+    String task;
+    @ManyToOne(targetEntity = OrderDetail.class)
+    @Column(name = "order_detail_id")
+    OrderDetail orderDetail;
+    @ManyToOne(targetEntity = UserEntity.class)
+    UserEntity user;
+    State state;
 }

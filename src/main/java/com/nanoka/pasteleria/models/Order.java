@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,25 +13,29 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_outputs")
+@Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class IngredientOutput {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne(targetEntity = Task.class)
-    Task task;
-    @ManyToOne(targetEntity = Ingredient.class)
-    Ingredient ingredient;
-    @Column(precision = 8, scale = 4)
-    BigDecimal quantity;
-    @Column(precision = 8, scale = 4)
-    BigDecimal price;
+    @ManyToOne(targetEntity = Client.class)
+    Client client;
+    @ManyToOne(targetEntity = UserEntity.class)
+    UserEntity user;
+    String address;
+    @Column(name = "home_delivery")
+    Boolean homeDelivery = false;
+    @Column(name = "total_price")
+    BigDecimal totalPrice;
+    @Column(name = "amount_paid")
+    BigDecimal amountPaid;
+    @Enumerated(EnumType.STRING)
+    State state;
     @CreationTimestamp
     @Column(name = "created_at")
     LocalDateTime createdAt;
-    @UpdateTimestamp
     @Column(name = "updated_at")
     LocalDateTime updatedAt;
 }

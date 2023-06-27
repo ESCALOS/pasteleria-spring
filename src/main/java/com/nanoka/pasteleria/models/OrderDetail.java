@@ -1,10 +1,6 @@
 package com.nanoka.pasteleria.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,23 +10,22 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_inputs")
+@Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class IngredientInput {
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne(targetEntity = Ingredient.class)
-    Ingredient ingredient;
+    @ManyToOne(targetEntity = Order.class)
+    Order order;
+    @ManyToOne(targetEntity = ProductPresentation.class)
+    ProductPresentation productPresentation;
     @Column(precision = 8, scale = 4)
     BigDecimal quantity;
+    @Column(name = "dispatched_quantity",precision = 8, scale = 4)
+    BigDecimal dispatchedQuantity = BigDecimal.ZERO;
     @Column(precision = 8, scale = 4)
     BigDecimal price;
-    @CreationTimestamp
-    @Column(name = "created_at")
-    LocalDateTime createdAt;
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    LocalDateTime updatedAt;
+    String detail;
 }
