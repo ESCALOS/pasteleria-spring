@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_outputs")
+@Table(name = "product_inputs")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class ProductInput {
@@ -23,7 +23,7 @@ public class ProductInput {
     @ManyToOne(targetEntity = Task.class)
     Task task;
     @ManyToOne(targetEntity = ProductStock.class)
-    @Column(name = "product_stock_id")
+    @JoinColumn(name = "product_stock_id")
     ProductStock productStock;
     @Column(precision = 8, scale = 4)
     BigDecimal quantity;

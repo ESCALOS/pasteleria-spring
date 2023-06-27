@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "clients")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Client {

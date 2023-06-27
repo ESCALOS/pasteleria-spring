@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "order_details")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class OrderDetail {

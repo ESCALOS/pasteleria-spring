@@ -1,5 +1,7 @@
 package com.nanoka.pasteleria.models;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,17 +10,18 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_inputs")
+@Table(name = "tasks")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String task;
     @ManyToOne(targetEntity = OrderDetail.class)
-    @Column(name = "order_detail_id")
+    @JoinColumn(name = "order_detail_id")
     OrderDetail orderDetail;
+    @Column(precision = 8, scale = 4)
+    BigDecimal quantity;
     @ManyToOne(targetEntity = UserEntity.class)
     UserEntity user;
     State state;

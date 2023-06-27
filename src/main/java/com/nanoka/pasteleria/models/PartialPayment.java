@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "partial_payments")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class PartialPayment {

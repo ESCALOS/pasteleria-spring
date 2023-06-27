@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_outputs")
+@Table(name = "product_outputs")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class ProductOutput {
@@ -21,10 +21,10 @@ public class ProductOutput {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne(targetEntity = OrderDetail.class)
-    @Column(name = "order_detail_id")
+    @JoinColumn(name = "order_detail_id")
     OrderDetail orderDetail;
     @ManyToOne(targetEntity = ProductStock.class)
-    @Column(name = "product_stock_id")
+    @JoinColumn(name = "product_stock_id")
     ProductStock productStock;
     @Column(precision = 8, scale = 4)
     BigDecimal quantity;
